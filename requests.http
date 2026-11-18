@@ -1,0 +1,92 @@
+@baseUrl = http://localhost:3000
+
+### 1. Створити зоотовар №1 (CAT)
+POST {{baseUrl}}/pet-supplies
+Content-Type: application/json
+
+{
+  "title": "Сухий корм Royal Canin Sterilised для котів",
+  "price": 1250.50,
+  "petCategory": "CAT",
+  "packageWeightKg": 2.00,
+  "brand": "Royal Canin"
+}
+
+### 2. Створити зоотовар №2 (DOG)
+POST {{baseUrl}}/pet-supplies
+Content-Type: application/json
+
+{
+  "title": "Корм Brit Premium Adult Large для собак",
+  "price": 1890.00,
+  "petCategory": "DOG",
+  "packageWeightKg": 15.00,
+  "brand": "Brit"
+}
+
+### 3. Створити зоотовар №3 (BIRD)
+POST {{baseUrl}}/pet-supplies
+Content-Type: application/json
+
+{
+  "title": "Зернова суміш Versele-Laga Prestige для папуг",
+  "price": 245.00,
+  "petCategory": "BIRD",
+  "packageWeightKg": 1.00,
+  "brand": "Versele-Laga"
+}
+
+### 4. Створити зоотовар №4 (FISH)
+POST {{baseUrl}}/pet-supplies
+Content-Type: application/json
+
+{
+  "title": "Корм для акваріумних рибок TetraMin Flakes",
+  "price": 320.00,
+  "petCategory": "FISH",
+  "packageWeightKg": 0.25,
+  "brand": "Tetra"
+}
+
+### 5. Створити зоотовар №5 (CAT)
+POST {{baseUrl}}/pet-supplies
+Content-Type: application/json
+
+{
+  "title": "Ласощі для котів Dreamies з лососем",
+  "price": 65.00,
+  "petCategory": "CAT",
+  "packageWeightKg": 0.15,
+  "brand": "Dreamies"
+}
+
+### 6. Отримати список із пагінацією (сторінка 1, по 3 записи)
+GET {{baseUrl}}/pet-supplies?page=1&limit=3
+Accept: application/json
+
+### 7. Отримати сторінку 2 пагінації
+GET {{baseUrl}}/pet-supplies?page=2&limit=3
+Accept: application/json
+
+### 8. Фільтрація за пошуковим рядком та категорією тварини
+GET {{baseUrl}}/pet-supplies?search=корм&petCategory=CAT
+Accept: application/json
+
+### 9. Отримати зоотовар за UUID (підставте реальний id із відповіді POST)
+@supplyId = 00000000-0000-0000-0000-000000000000
+GET {{baseUrl}}/pet-supplies/{{supplyId}}
+Accept: application/json
+
+### 10. Оновити зоотовар за UUID
+PATCH {{baseUrl}}/pet-supplies/{{supplyId}}
+Content-Type: application/json
+
+{
+  "price": 1350.00
+}
+
+### 11. М'яке видалення (Soft Delete -> 204 No Content)
+DELETE {{baseUrl}}/pet-supplies/{{supplyId}}
+
+### 12. Відновлення видаленого запису (Soft Restore -> 200 OK)
+PATCH {{baseUrl}}/pet-supplies/{{supplyId}}/restore
